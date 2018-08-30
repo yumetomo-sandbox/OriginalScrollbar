@@ -5,7 +5,7 @@ module.exports = {
   mode: 'production',
   // エントリーポイントの設定
   entry: {
-    app: path.join(__dirname, '/webpack/app.js'),
+    app: path.join(__dirname, '/webpack/app.js')
   },
   // 出力の設定
   output: {
@@ -50,7 +50,6 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: 'jquery',
       velocity: 'velocity-animate'
     })
   ]
