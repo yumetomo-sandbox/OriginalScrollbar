@@ -98,6 +98,9 @@
     $SCROLL_WRAPPER.scrollLeft = scrollLeft;
   }
 
+  /**
+   * コンテンツエリアのドラッグでスクロールした後の余韻
+   */
   function phantomDrag() {
     let scrollValue = isScrollToRight
       ? -dragSpeed + phantomCount * (phantomCount / dragSpeed)
@@ -142,7 +145,7 @@
   $SCROLL_WRAPPER.addEventListener('mousedown', function(event) {
     isWrapperClicking = true;
     lastCursorPosition = event.pageX;
-    phantomCount = 0;
+    dragSpeed = 0;
     window.cancelAnimationFrame(phantomDrag);
   });
 
@@ -153,14 +156,20 @@
     if (isBarClicking) isBarClicking = false;
     if (isWrapperClicking) {
       isWrapperClicking = false;
-      window.requestAnimationFrame(phantomDrag);
+      if (dragSpeed !== 0) {
+        phantomCount = 0;
+        window.requestAnimationFrame(phantomDrag);
+      }
     }
   });
   document.body.addEventListener('mouseleave', function() {
     if (isBarClicking) isBarClicking = false;
     if (isWrapperClicking) {
       isWrapperClicking = false;
-      window.requestAnimationFrame(phantomDrag);
+      if (dragSpeed !== 0) {
+        phantomCount = 0;
+        if (dragSpeed !== 0) window.requestAnimationFrame(phantomDrag);
+      }
     }
   });
 
