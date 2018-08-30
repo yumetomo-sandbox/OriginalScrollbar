@@ -9,6 +9,7 @@ body {
 
 .scroll {
   padding: 200px 0 0;
+  user-select: none;
   &__area {
     width: 100%;
     height: 300px;
