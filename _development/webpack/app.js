@@ -82,17 +82,18 @@
     if (isBarClicking) {
       const CURSOR_POSITION = event.pageX;
       const DIFFERENCE = CURSOR_POSITION - lastCursorPosition;
+      lastCursorPosition = CURSOR_POSITION;
       let translateX = lastBarPosition + DIFFERENCE;
       if (translateX <= 0) translateX = 0;
       if (translateX >= maxMoveBarValue) translateX = maxMoveBarValue;
+
+      // バーの位置に応じてスクロールさせる
       const BAR_MOVE_PERCENTAGE = translateX / maxMoveBarValue;
       const SCROLL_LEFT = maxScrollValue * BAR_MOVE_PERCENTAGE;
       lastBarPosition = translateX;
 
       $BAR.style.transform = `translateX(${translateX}px)`;
       $SCROLL_WRAPPER.scrollLeft = SCROLL_LEFT;
-
-      lastCursorPosition = CURSOR_POSITION;
     }
   });
 
